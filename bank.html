@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account</title>
+</head>
+<body>
+    <h1>BANK ACCOUNT</h1>
+</body>
+<script>
+    function BankAccount(accountNumber,name, type, balance){
+    this.accountNumber=accountNumber;
+    this.name=name;
+    this.type=type;
+    this.balance=balance;
+    this.active=true;
+    }
+    BankAccount.prototype.deposit = function(amt) {
+        this.balance += amt;
+    };
+
+    BankAccount.prototype.withdraw = function(amt) {
+        if (amt <= this.balance) {
+            this.balance -= amt;
+            // console.log("withdrawn successfully", amt);
+        }
+    };
+
+    BankAccount.prototype.checkBalance = function() {
+        console.log(`Account Balance for ${this.name}: ${this.balance}`);
+    };
+
+    BankAccount.prototype.isActive = function() {
+        return this.active;
+    };
+
+    function getTotalBalance(accounts) {
+        let totalBalance = 0;
+        for (const account of accounts) {
+            if (account.isActive()) {
+                totalBalance += account.balance;
+            }
+        }
+        return totalBalance;
+    }
+
+    let account1 = new BankAccount(26476784398747, "swetha", "savings-act", 1000);
+    let account2 = new BankAccount(53876356783478, "sneha", "current-act", 1000);
+    let account3 = new BankAccount(65734897583687, "poornima", "salary-act", 1000);
+    let account4 = new BankAccount(57848598768099, "chayan", "fixed-act", 1000);
+    let account5 = new BankAccount(12378978578379, "dhanush", "recurring-act", 1000);
+
+    account1.deposit(100);
+    account1.withdraw(300);
+
+    account2.deposit(100);
+    account2.withdraw(300);
+
+    account3.deposit(100);
+    account3.withdraw(300);
+
+    account4.deposit(100);
+    account4.withdraw(300);
+
+    account5.deposit(100);
+    account5.withdraw(300);
+
+    console.log(getTotalBalance([account1, account2, account3, account4, account5]));
+    console.log(account1.isActive(), account2.isActive(), account3.isActive(), account4.isActive(), account5.isActive());
+</script>
+</script>
+</html>
